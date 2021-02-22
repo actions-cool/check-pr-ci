@@ -5970,7 +5970,8 @@ const context = github.context;
 
 async function run() {
   try {
-    if (context.eventName === 'schedule') {
+    const test = true;
+    if (test || context.eventName === 'schedule') {
       const { owner, repo } = context.repo;
       const filterLabel = core.getInput('filter-label');
       const filterCreator = core.getInput('filter-creator');
@@ -6145,6 +6146,10 @@ async function getPRStatus(owner, repo, number) {
       ifCIHasFailure = true;
     }
   });
+
+  core.info(
+    `[getPRStatus] [number: ${number}] [commitState: ${commitState}] [ifCICompleted: ${ifCICompleted}] [ifCIHasFailure: ${ifCIHasFailure}]`,
+  );
 
   return {
     commitState,

@@ -75,6 +75,10 @@ async function getPRStatus(owner, repo, number) {
     }
   });
 
+  core.info(
+    `[getPRStatus] [number: ${number}] [commitState: ${commitState}] [ifCICompleted: ${ifCICompleted}] [ifCIHasFailure: ${ifCIHasFailure}]`,
+  );
+
   return {
     commitState,
     ifCICompleted,

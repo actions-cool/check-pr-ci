@@ -33,6 +33,7 @@ jobs:
           merge-method: 'merge'
           merge-title: 'Auto merge (#${number})'
           failure-review: 'REQUEST_CHANGES'
+          failure-review-body: 'PTAL'
           failure-close: true
 ```
 
@@ -53,6 +54,7 @@ jobs:
 | failure-close | Whether close PR. | boolean | ✖ |
 
 - `merge-title`: `${number}` will be replaced with the current PR number
+- `failure-review`: When use this, the `failure-review-body` is necessary
 
 ## Changelog
 
