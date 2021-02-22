@@ -5975,6 +5975,7 @@ async function run() {
       const filterLabel = core.getInput('filter-label');
       const filterCreator = core.getInput('filter-creator');
       const filterCreatorAuthority = core.getInput('filter-creator-authority');
+      const filterHeadRef = core.getInput('filter-head-ref');
 
       const successReview = core.getInput('success-review');
       const successReviewBody = core.getInput('success-review-body');
@@ -6005,7 +6006,10 @@ async function run() {
             ? dealStringToArr(filterCreator).includes(it.user.login)
             : true;
           const checkPRType = filterLabel ? it.pull_request : true;
-          if (filterCreatorResult && checkPRType) {
+          const checkPRHeadRef = filterHeadRef
+            ? dealStringToArr(filterHeadRef).includes(it.head.ref)
+            : true;
+          if (filterCreatorResult && checkPRType && checkPRHeadRef) {
             if (filterCreatorAuthority) {
               const checkAuthResult = await checkAuthority(
                 owner,

@@ -21,6 +21,8 @@ inputs:
     description: Filter PR by creator name.
   filter-creator-authority:
     description: Filter PR by creator authority.
+  filter-head-ref:
+    description: Filter PR head ref branch.
   # resule
   ## success
   success-review:
