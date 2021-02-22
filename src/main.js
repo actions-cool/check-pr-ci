@@ -18,8 +18,7 @@ const context = github.context;
 
 async function run() {
   try {
-    const test = true;
-    if (test || context.eventName === 'schedule') {
+    if (context.eventName === 'schedule') {
       const { owner, repo } = context.repo;
       const filterLabel = core.getInput('filter-label');
       const filterCreator = core.getInput('filter-creator');
