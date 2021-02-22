@@ -5958,6 +5958,7 @@ const { dealStringToArr } = __nccwpck_require__(55);
 const {
   getIssues,
   getPR,
+  getOnePR,
   checkAuthority,
   getPRStatus,
   doPRReview,
@@ -6006,9 +6007,11 @@ async function run() {
             ? dealStringToArr(filterCreator).includes(it.user.login)
             : true;
           const checkPRType = filterLabel ? it.pull_request : true;
-          const checkPRHeadRef = filterHeadRef
-            ? dealStringToArr(filterHeadRef).includes(it.head.ref)
-            : true;
+          let checkPRHeadRef = true;
+          if (filterHeadRef) {
+            const onePR = await getOnePR(owner, repo, it.number);
+            checkPRHeadRef = filterHeadRef === onePR.head.ref;
+          }
           if (filterCreatorResult && checkPRType && checkPRHeadRef) {
             if (filterCreatorAuthority) {
               const checkAuthResult = await checkAuthority(
@@ -6107,6 +6110,15 @@ async function getPR(params, page = 1) {
     prs = prs.concat(await getPR(params, page + 1));
   }
   return prs;
+}
+
+async function getOnePR(owner, repo, number) {
+  const { data } = await octokit.pulls.get({
+    owner,
+    repo,
+    pull_number: number,
+  });
+  return data;
 }
 
 async function checkAuthority(owner, repo, username, filterCreatorAuthority) {
@@ -6231,6 +6243,7 @@ async function doClosePR(owner, repo, number) {
 module.exports = {
   getIssues,
   getPR,
+  getOnePR,
   checkAuthority,
   getPRStatus,
   doPRReview,

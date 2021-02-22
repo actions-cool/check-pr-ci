@@ -31,6 +31,15 @@ async function getPR(params, page = 1) {
   return prs;
 }
 
+async function getOnePR(owner, repo, number) {
+  const { data } = await octokit.pulls.get({
+    owner,
+    repo,
+    pull_number: number,
+  });
+  return data;
+}
+
 async function checkAuthority(owner, repo, username, filterCreatorAuthority) {
   let out;
   const res = await octokit.repos.getCollaboratorPermissionLevel({
@@ -153,6 +162,7 @@ async function doClosePR(owner, repo, number) {
 module.exports = {
   getIssues,
   getPR,
+  getOnePR,
   checkAuthority,
   getPRStatus,
   doPRReview,

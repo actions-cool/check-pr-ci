@@ -6,6 +6,7 @@ const { dealStringToArr } = require('actions-util');
 const {
   getIssues,
   getPR,
+  getOnePR,
   checkAuthority,
   getPRStatus,
   doPRReview,
@@ -54,9 +55,11 @@ async function run() {
             ? dealStringToArr(filterCreator).includes(it.user.login)
             : true;
           const checkPRType = filterLabel ? it.pull_request : true;
-          const checkPRHeadRef = filterHeadRef
-            ? dealStringToArr(filterHeadRef).includes(it.head.ref)
-            : true;
+          let checkPRHeadRef = true;
+          if (filterHeadRef) {
+            const onePR = await getOnePR(owner, repo, it.number);
+            checkPRHeadRef = filterHeadRef === onePR.head.ref;
+          }
           if (filterCreatorResult && checkPRType && checkPRHeadRef) {
             if (filterCreatorAuthority) {
               const checkAuthResult = await checkAuthority(
