@@ -1,41 +1,58 @@
-<p align="center">
-  <a href="">
-    <img width="140" src="https://avatars.githubusercontent.com/u/73879334?s=200&v=4" />
-  </a>
-</p>
+# 🚗 Check PR CI
 
-<h1 align="center">Action JavaScript Template</h1>
-<div align="center">
-A simple javascript template for rapid development of GitHub actions.
-</div>
+![](https://img.shields.io/github/workflow/status/actions-cool/check-pr-ci/CI?style=flat-square)
+[![](https://img.shields.io/badge/marketplace-check--pr--ci-blueviolet?style=flat-square)](https://github.com/marketplace/actions/check-pr-ci)
+[![](https://img.shields.io/github/v/release/actions-cool/check-pr-ci?style=flat-square&color=orange)](https://github.com/actions-cool/check-pr-ci/releases)
 
-![](https://img.shields.io/github/workflow/status/actions-cool/action-js-template/CI?style=flat-square)
-[![](https://img.shields.io/badge/marketplace-action--js--template-blueviolet?style=flat-square)](https://github.com/marketplace/actions/action-js-template)
-[![](https://img.shields.io/github/v/release/actions-cool/action-js-template?style=flat-square&color=orange)](https://github.com/actions-cool/action-js-template/releases)
 
-## 🚀 How to use?
+Check the PR CI status and perform some operation after success or failure.
 
-![](https://github.com/actions-cool/resources/blob/main/image/template-js.png?raw=true)
+Since CI execution takes time, this Action only support `schedule` trigger.
 
-## 📒 Catalog Introduction
+## How to use?
 
+```yml
+name: Check PR CI
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions-cool/check-pr-ci@v1.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          filter-label: 'check-ci'
+          filter-creator-authority: 'write'
+          success-review: true
+          success-review-body: 'LGTM'
+          success-merge: true
+          merge-method: 'merge'
+          merge-title: 'Auto merge (#${number})'
+          failure-review: 'REQUEST_CHANGES'
+          failure-close: true
 ```
-├── .github/workflows/     The CI for make sure it is packaged correctly
-├── dist                   Package the generated Aciton execution code
-├── src                    Component home directory
-│   └── main.js            Your code
-└── action.yml             Action config
-```
 
-The rest of the documents can be consulted by yourself.
+| Name | Desc | Type | Required |
+| -- | -- | -- | -- |
+| token | GitHub token | string | ✖ |
+| filter-label | Filter PR by label. | string | ✖ |
+| filter-creator | Filter PR by creator name. | string | ✖ |
+| filter-creator-authority | Filter PR by creator authority. | string | ✖ |
+| success-review | Whether to approve when success. | boolean | ✖ |
+| success-review-body | Review body. | string | ✖ |
+| success-merge | Whether to merge when success. | boolean | ✖ |
+| merge-method | Merge method to use. Possible values are `merge`, `squash` or `rebase`. Default is `merge`. | string | ✖ |
+| merge-title | Title for the automatic merge. | string | ✖ |
+| merge-message | Extra detail to append to automatic merge. | string | ✖ |
+| failure-review | Include REQUEST_CHANGES or COMMENT. | string | ✖ |
+| failure-review-body | Review body. | string | ✖ |
+| failure-close | Whether close PR. | boolean | ✖ |
 
-## 🤖 Command introduction
-
-| Name | Desc |
-| -- | -- |
-| package | action build for release |
-| format | prettier write |
-| format-check | prettier check |
+- `merge-title`: `${number}` will be replaced with the current PR number
 
 ## Changelog
 

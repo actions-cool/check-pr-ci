@@ -1,23 +1,47 @@
 # https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions
 name: 'Check PR CI'
-description: 'A simple javascript template for rapid development of GitHub actions.'
+description: 'Check the PR CI status and perform some operation after success or failure.'
 author: 'xrkffgg'
 
 branding:
   # https://feathericons.com/
   # e.g. https://haya14busa.github.io/github-action-brandings/
-  icon: 'file'
-  color: 'blue'
+  icon: 'battery-charging'
+  color: 'red'
 
 inputs:
-  GITHUB_TOKEN:
+  token:
     description: Secret GitHub API token to use for making API requests.
     default: ${{ github.token }}
     required: true
-
-#outputs:
-#  result:
-#    description: action result
+  # filter
+  filter-label:
+    description: Filter PR by label.
+  filter-creator:
+    description: Filter PR by creator name.
+  filter-creator-authority:
+    description: Filter PR by creator authority.
+  # resule
+  ## success
+  success-review:
+    description: Whether to approve when success.
+  success-review-body:
+    description: Review body.
+  success-merge:
+    description: Whether to merge when success.
+  merge-method:
+    description: Merge method to use. Possible values are merge, squash or rebase. Default is merge.
+  merge-title:
+    description: Title for the automatic merge.
+  merge-message:
+    description: Extra detail to append to automatic merge.
+  ## failure
+  failure-review:
+    description: Include REQUEST_CHANGES or COMMENT.
+  failure-review-body:
+    description: Review body.
+  failure-close:
+    description: Whether close PR.
 
 runs:
   using: 'node12'
