@@ -83,8 +83,11 @@ async function run() {
       for (let i = 0; i < filterPRs.length; i++) {
         let number = filterPRs[i];
         const result = await getPRStatus(owner, repo, number);
-        if (result.commitState !== 'pending' && result.ifCICompleted) {
-          if (result.commitState === 'success' && !result.ifCIHasFailure) {
+        if (result.ifCICompleted) {
+          if (
+            (result.commitState === 'success' || result.commitState === 'pending') &&
+            !result.ifCIHasFailure
+          ) {
             if (successReview === 'true') {
               await doPRReview(owner, repo, number, 'APPROVE', successReviewBody);
             }
