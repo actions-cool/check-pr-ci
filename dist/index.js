@@ -6010,7 +6010,7 @@ async function run() {
           let checkPRHeadRef = true;
           if (filterHeadRef) {
             const onePR = await getOnePR(owner, repo, it.number);
-            checkPRHeadRef = filterHeadRef === onePR.head.ref;
+            checkPRHeadRef = dealStringToArr(filterHeadRef).includes(onePR.head.ref);
           }
           if (filterCreatorResult && checkPRType && checkPRHeadRef) {
             if (filterCreatorAuthority) {
