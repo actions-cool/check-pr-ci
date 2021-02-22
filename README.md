@@ -56,6 +56,17 @@ jobs:
 - `merge-title`: `${number}` will be replaced with the current PR number
 - `failure-review`: When use this, the `failure-review-body` is necessary
 
+## ⚡ Feedback
+
+You are very welcome to try it out and put forward your comments. You can use the following methods:
+
+- Report bugs or consult with [Issue](https://github.com/actions-cool/check-pr-ci/issues)
+- Submit [Pull Request](https://github.com/actions-cool/check-pr-ci/pulls) to improve the code of `check-pr-ci`
+
+也欢迎加入 钉钉交流群
+
+![](https://github.com/actions-cool/resources/blob/main/dingding.jpeg?raw=true)
+
 ## Changelog
 
 [CHANGELOG](./CHANGELOG.md)
