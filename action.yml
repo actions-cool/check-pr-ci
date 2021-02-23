@@ -4,8 +4,7 @@ description: 'Check the PR CI status and perform some operation after success or
 author: 'xrkffgg'
 
 branding:
-  # https://feathericons.com/
-  # e.g. https://haya14busa.github.io/github-action-brandings/
+  # https://actions-cool.github.io/github-action-branding/
   icon: 'battery-charging'
   color: 'red'
 
