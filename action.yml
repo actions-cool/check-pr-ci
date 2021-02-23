@@ -23,6 +23,8 @@ inputs:
     description: Filter PR by creator authority.
   filter-head-ref:
     description: Filter PR head ref branch.
+  filter-support-fork:
+    description: Filter PR come from.
   # resule
   ## success
   success-review:

@@ -25,6 +25,7 @@ async function run() {
       const filterCreator = core.getInput('filter-creator');
       const filterCreatorAuthority = core.getInput('filter-creator-authority');
       const filterHeadRef = core.getInput('filter-head-ref');
+      const filterSupportFork = core.getInput('filter-support-fork') || 'true';
 
       const successReview = core.getInput('success-review');
       const successReviewBody = core.getInput('success-review-body');
@@ -60,7 +61,12 @@ async function run() {
             const onePR = await getOnePR(owner, repo, it.number);
             checkPRHeadRef = dealStringToArr(filterHeadRef).includes(onePR.head.ref);
           }
-          if (filterCreatorResult && checkPRType && checkPRHeadRef) {
+          let checkPRFork = true;
+          if (filterSupportFork == 'false') {
+            const onePR = await getOnePR(owner, repo, it.number);
+            checkPRFork = owner === onePR.head.user.login;
+          }
+          if (filterCreatorResult && checkPRType && checkPRHeadRef && checkPRFork) {
             if (filterCreatorAuthority) {
               const checkAuthResult = await checkAuthority(
                 owner,

@@ -4,7 +4,7 @@
 
 `2021.02.23`
 
-- feat: add `filter-head-ref`.
+- feat: add `filter-head-ref` `filter-support-fork`.
 
 ## v1.0.0
 
