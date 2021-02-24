@@ -6088,7 +6088,7 @@ run();
 const core = __nccwpck_require__(186);
 const { Octokit } = __nccwpck_require__(375);
 
-const { checkPermission } = __nccwpck_require__(55);
+const { dealStringToArr, checkPermission } = __nccwpck_require__(55);
 
 const token = core.getInput('token');
 const octokit = new Octokit({ auth: `token ${token}` });
@@ -6141,6 +6141,7 @@ async function checkAuthority(owner, repo, username, filterCreatorAuthority) {
 }
 
 async function getPRStatus(owner, repo, number) {
+  const skipRunNames = core.getInput('skip-run-names');
   const { data: pr } = await octokit.pulls.get({
     owner,
     repo,
@@ -6163,16 +6164,16 @@ async function getPRStatus(owner, repo, number) {
   let ifCICompleted = true;
   let ifCIHasFailure = false;
   runs.forEach(it => {
-    if (it.status !== 'completed') {
+    if (it.status == 'in_progress') {
       ifCICompleted = false;
     }
-    if (it.conclusion === 'failure') {
+    if (it.conclusion === 'failure' && !dealStringToArr(skipRunNames).includes(it.name)) {
       ifCIHasFailure = true;
     }
   });
 
   core.info(
-    `[getPRStatus] [number: ${number}] [commitState: ${commitState}] [ifCICompleted: ${ifCICompleted}] [ifCIHasFailure: ${ifCIHasFailure}]`,
+    `[getPRStatus] [number: ${number}/${runs.length}] [commit: ${commit}] [commitState: ${commitState}] [ifCICompleted: ${ifCICompleted}] [ifCIHasFailure: ${ifCIHasFailure}]`,
   );
 
   return {

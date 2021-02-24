@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.2.0
+
+`2021.02.24`
+
+- feat: add `skip-run-names`.
+
 ## v1.1.0
 
 `2021.02.23`

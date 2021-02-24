@@ -24,6 +24,9 @@ inputs:
     description: Filter PR head ref branch.
   filter-support-fork:
     description: Filter PR come from.
+  # check
+  skip-run-names:
+    description: Skip some run names.
   # resule
   ## success
   success-review:

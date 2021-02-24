@@ -21,7 +21,7 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions-cool/check-pr-ci@v1.1.0
+      - uses: actions-cool/check-pr-ci@v1.2.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           filter-label: 'check-ci'
@@ -46,6 +46,7 @@ jobs:
 | filter-creator-authority | Filter PR by creator authority. | string | ✖ |
 | filter-head-ref | Filter PR head ref branch. | string | ✖ |
 | filter-support-fork | Filter PR come from. Default `true`. | boolean | ✖ |
+| skip-run-names | Skip some run names. | string | ✖ |
 | success-review | Whether to approve when success. | boolean | ✖ |
 | success-review-body | Review body. | string | ✖ |
 | success-merge | Whether to merge when success. | boolean | ✖ |
@@ -58,6 +59,7 @@ jobs:
 
 - `merge-title`: `${number}` will be replaced with the current PR number
 - `failure-review`: When use this, the `failure-review-body` is necessary
+- `skip-run-names`: [GitHub Doc](https://docs.github.com/en/rest/reference/checks#list-check-runs-for-a-git-reference) `check_runs` `name`
 
 ## ⚡ Feedback
 
