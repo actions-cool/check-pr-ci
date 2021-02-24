@@ -79,14 +79,16 @@ async function getPRStatus(owner, repo, number) {
   runs.forEach(it => {
     if (it.status == 'in_progress') {
       ifCICompleted = false;
+      core.info(`[checkPRstatus][number: ${number}][inPorgress: ${it.name}]`);
     }
     if (it.conclusion === 'failure' && !dealStringToArr(skipRunNames).includes(it.name)) {
       ifCIHasFailure = true;
+      core.info(`[checkPRstatus][number: ${number}][hasFailure: ${it.name}]`);
     }
   });
 
   core.info(
-    `[getPRStatus] [number: ${number}/${runs.length}] [commit: ${commit}] [commitState: ${commitState}] [ifCICompleted: ${ifCICompleted}] [ifCIHasFailure: ${ifCIHasFailure}]`,
+    `[getPRStatus][number: ${number}/${runs.length}][commit: ${commit}][commitState: ${commitState}][ifCICompleted: ${ifCICompleted}][ifCIHasFailure: ${ifCIHasFailure}]`,
   );
 
   return {
