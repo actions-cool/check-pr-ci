@@ -78,11 +78,15 @@ async function getPRStatus(owner, repo, number) {
   let ifCIHasFailure = false;
   runs.forEach(it => {
     if (it.status == 'in_progress') {
-      ifCICompleted = false;
+      if (!dealStringToArr(skipRunNames).includes(it.name)) {
+        ifCICompleted = false;
+      }
       core.info(`[checkPRstatus][number: ${number}][inPorgress: ${it.name}]`);
     }
-    if (it.conclusion === 'failure' && !dealStringToArr(skipRunNames).includes(it.name)) {
-      ifCIHasFailure = true;
+    if (it.conclusion === 'failure') {
+      if (!dealStringToArr(skipRunNames).includes(it.name)) {
+        ifCIHasFailure = true;
+      }
       core.info(`[checkPRstatus][number: ${number}][hasFailure: ${it.name}]`);
     }
   });
