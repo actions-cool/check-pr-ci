@@ -18,7 +18,7 @@ on:
     - cron: "*/10 * * * *"
 
 jobs:
-  check:
+  check-pr-ci:
     runs-on: ubuntu-latest
     steps:
       - uses: actions-cool/check-pr-ci@v1.2.0
@@ -59,7 +59,7 @@ jobs:
 
 - `merge-title`: `${number}` will be replaced with the current PR number
 - `failure-review`: When use this, the `failure-review-body` is necessary
-- `skip-run-names`: [GitHub Doc](https://docs.github.com/en/rest/reference/checks#list-check-runs-for-a-git-reference) `check_runs` `name`
+- `skip-run-names`: [GitHub Doc](https://docs.github.com/en/rest/reference/checks#list-check-runs-for-a-git-reference) `check_runs` `name`. When you merge default branch into another, you should add `check-pr-ci` (The jobs name)
 
 ## ⚡ Feedback
 

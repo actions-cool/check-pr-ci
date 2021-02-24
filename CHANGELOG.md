@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.2.1
+
+`2021.02.24`
+
+- style: add more info.
+
 ## v1.2.0
 
 `2021.02.24`
