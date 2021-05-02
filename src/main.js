@@ -107,6 +107,7 @@ async function run() {
             const onePR = await getOnePR(owner, repo, it.number);
             if (onePR.mergeable_state === 'dirty') {
               await doPRReview(owner, repo, number, 'REQUEST_CHANGES', conflictReviewBody);
+              await doClosePR(owner, repo, number);
               return false;
             }
             if (successReview === 'true') {
