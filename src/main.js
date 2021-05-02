@@ -30,6 +30,9 @@ async function run() {
       const successReview = core.getInput('success-review');
       const successReviewBody = core.getInput('success-review-body');
 
+      const defaultConflictReviewBody = `😅 This branch has conflicts that must be resolved!`;
+      const conflictReviewBody = core.getInput('conflict-review-body') || defaultConflictReviewBody;
+
       const successMerge = core.getInput('success-merge');
       const mergeMethod = core.getInput('merge-method') || 'merge';
       const mergeTitle = core.getInput('merge-title');
@@ -101,6 +104,11 @@ async function run() {
             (result.commitState === 'success' || result.commitState === 'pending') &&
             !result.ifCIHasFailure
           ) {
+            const onePR = await getOnePR(owner, repo, it.number);
+            if (onePR.mergeable_state === 'dirty') {
+              await doPRReview(owner, repo, number, 'REQUEST_CHANGES', conflictReviewBody);
+              return false;
+            }
             if (successReview === 'true') {
               await doPRReview(owner, repo, number, 'APPROVE', successReviewBody);
             }

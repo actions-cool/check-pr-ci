@@ -41,6 +41,9 @@ inputs:
     description: Title for the automatic merge.
   merge-message:
     description: Extra detail to append to automatic merge.
+  ## conflict
+  conflict-review-body:
+    description: Comment when has conflict.
   ## failure
   failure-review:
     description: Include REQUEST_CHANGES or COMMENT.

@@ -1,6 +1,5 @@
 {
   "name": "check-pr-ci",
-  "version": "1.2.2",
   "private": true,
   "description": "Check the PR CI status and perform some operation after success or failure.",
   "main": "src/main.js",

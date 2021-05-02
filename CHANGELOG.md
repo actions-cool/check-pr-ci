@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.3.0
+
+- feat: add `conflict-review-body`.
+
 ## v1.2.2
 
 `2021.02.24`
