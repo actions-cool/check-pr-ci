@@ -2,6 +2,8 @@
 
 ## v1.3.0
 
+`2021.05.02`
+
 - feat: add `conflict-review-body`.
 
 ## v1.2.2
