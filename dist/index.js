@@ -7398,7 +7398,7 @@ async function run() {
             (result.commitState === 'success' || result.commitState === 'pending') &&
             !result.ifCIHasFailure
           ) {
-            const onePR = await getOnePR(owner, repo, it.number);
+            const onePR = await getOnePR(owner, repo, number);
             if (onePR.mergeable_state === 'dirty') {
               await doPRReview(owner, repo, number, 'REQUEST_CHANGES', conflictReviewBody);
               await doClosePR(owner, repo, number);
