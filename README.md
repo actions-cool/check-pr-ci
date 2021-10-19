@@ -21,7 +21,7 @@ jobs:
   check-pr-ci:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions-cool/check-pr-ci@v1.3.0
+      - uses: actions-cool/check-pr-ci@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           filter-label: 'check-ci'

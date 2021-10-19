@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-const { dealStringToArr } = require('actions-util');
+const { dealStringToArr, THANKS } = require('actions-util');
 
 const {
   getIssues,
@@ -129,6 +129,7 @@ async function run() {
     } else {
       core.setFailed(`This Action only support "schedule". CI process need time!`);
     }
+    core.info(THANKS);
   } catch (error) {
     core.setFailed(error.message);
   }
