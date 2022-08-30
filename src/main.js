@@ -100,10 +100,7 @@ async function run() {
         let number = filterPRs[i];
         const result = await getPRStatus(owner, repo, number);
         if (result.ifCICompleted) {
-          if (
-            (result.commitState === 'success' || result.commitState === 'pending') &&
-            !result.ifCIHasFailure
-          ) {
+          if (result.commitState === 'success' && !result.ifCIHasFailure) {
             const onePR = await getOnePR(owner, repo, number);
             if (onePR.mergeable_state === 'dirty') {
               await doPRReview(owner, repo, number, 'REQUEST_CHANGES', conflictReviewBody);

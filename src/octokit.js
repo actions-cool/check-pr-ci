@@ -81,18 +81,18 @@ async function getPRStatus(owner, repo, number) {
       if (!dealStringToArr(skipRunNames).includes(it.name)) {
         ifCICompleted = false;
       }
-      core.info(`[checkPRstatus][number: ${number}][inPorgress: ${it.name}]`);
+      core.info(`[checkPRstatus] [number: ${number}] [inPorgress: ${it.name}]`);
     }
     if (it.conclusion === 'failure') {
       if (!dealStringToArr(skipRunNames).includes(it.name)) {
         ifCIHasFailure = true;
       }
-      core.info(`[checkPRstatus][number: ${number}][hasFailure: ${it.name}]`);
+      core.info(`[checkPRstatus] [number: ${number}] [hasFailure: ${it.name}]`);
     }
   });
 
   core.info(
-    `[getPRStatus][number: ${number}/${runs.length}][commit: ${commit}][commitState: ${commitState}][ifCICompleted: ${ifCICompleted}][ifCIHasFailure: ${ifCIHasFailure}]`,
+    `[getPRStatus] [number: ${number}] [CI: ${runs.length}] [commit: ${commit}]\n\n[commitState: ${commitState}] [ifCICompleted: ${ifCICompleted}] [ifCIHasFailure: ${ifCIHasFailure}]`,
   );
 
   return {
