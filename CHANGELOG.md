@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.4.1
+
+`2022.08.30`
+
+- fix: remove commit pending.
+
 ## v1.4.0
 
 `2021.10.19`
