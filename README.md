@@ -1,6 +1,6 @@
 # 🚗 Check PR CI
 
-![](https://img.shields.io/github/workflow/status/actions-cool/check-pr-ci/CI?style=flat-square)
+![](https://img.shields.io/github/actions/workflow/status/actions-cool/check-pr-ci/test.yml?style=flat-square)
 [![](https://img.shields.io/badge/marketplace-check--pr--ci-blueviolet?style=flat-square)](https://github.com/marketplace/actions/check-pr-ci)
 [![](https://img.shields.io/github/v/release/actions-cool/check-pr-ci?style=flat-square&color=orange)](https://github.com/actions-cool/check-pr-ci/releases)
 
