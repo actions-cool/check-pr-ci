@@ -82,13 +82,17 @@ async function getPRStatus(owner, repo, number) {
       if (!isSkip) {
         ifCICompleted = false;
       }
-      core.info(`[checkPRstatus] [number: ${number}] [inPorgress: ${it.name}]${isSkip ? ' 🛎 SKIP' : ''}`);
+      core.info(
+        `[checkPRstatus] [number: ${number}] [inPorgress: ${it.name}]${isSkip ? ' 🛎 SKIP' : ''}`,
+      );
     }
     if (it.conclusion === 'failure') {
       if (!isSkip) {
         ifCIHasFailure = true;
       }
-      core.info(`[checkPRstatus] [number: ${number}] [hasFailure: ${it.name}]${isSkip ? ' 🛎 SKIP' : ''}`);
+      core.info(
+        `[checkPRstatus] [number: ${number}] [hasFailure: ${it.name}]${isSkip ? ' 🛎 SKIP' : ''}`,
+      );
     }
   });
 
