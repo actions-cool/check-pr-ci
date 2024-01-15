@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.5.0
+
+`2024.01.15`
+
+- feat: support console skip.
+
 ## v1.4.1
 
 `2022.08.30`

@@ -9900,7 +9900,7 @@ async function checkAuthority(owner, repo, username, filterCreatorAuthority) {
 }
 
 async function getPRStatus(owner, repo, number) {
-  const skipRunNames = core.getInput('skip-run-names');
+  const skipRunNames = dealStringToArr(core.getInput('skip-run-names'));
   const { data: pr } = await octokit.pulls.get({
     owner,
     repo,
@@ -9923,17 +9923,22 @@ async function getPRStatus(owner, repo, number) {
   let ifCICompleted = true;
   let ifCIHasFailure = false;
   runs.forEach(it => {
+    const isSkip = skipRunNames.includes(it.name);
     if (it.status == 'in_progress') {
-      if (!dealStringToArr(skipRunNames).includes(it.name)) {
+      if (!isSkip) {
         ifCICompleted = false;
       }
-      core.info(`[checkPRstatus] [number: ${number}] [inPorgress: ${it.name}]`);
+      core.info(
+        `[checkPRstatus] [number: ${number}] [inPorgress: ${it.name}]${isSkip ? ' 🛎 SKIP' : ''}`,
+      );
     }
     if (it.conclusion === 'failure') {
-      if (!dealStringToArr(skipRunNames).includes(it.name)) {
+      if (!isSkip) {
         ifCIHasFailure = true;
       }
-      core.info(`[checkPRstatus] [number: ${number}] [hasFailure: ${it.name}]`);
+      core.info(
+        `[checkPRstatus] [number: ${number}] [hasFailure: ${it.name}]${isSkip ? ' 🛎 SKIP' : ''}`,
+      );
     }
   });
 
