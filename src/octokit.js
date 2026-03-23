@@ -60,6 +60,8 @@ async function getPRStatus(owner, repo, number) {
     repo,
     pull_number: number,
   });
+  const skipLabelName = core.getInput('skip-check-label-name') || 'skip-ci-check';
+  const skipCICheck = (pr.labels || []).some(label => label.name === skipLabelName);
 
   const commit = pr.head.sha;
   const refOwner = pr.head.user.login;
@@ -77,7 +79,7 @@ async function getPRStatus(owner, repo, number) {
   let ifCICompleted = true;
   let ifCIHasFailure = false;
   runs.forEach(it => {
-    const isSkip = skipRunNames.includes(it.name);
+    const isSkip = skipRunNames.includes(it.name) || skipCICheck;
     if (it.status == 'in_progress') {
       if (!isSkip) {
         ifCICompleted = false;

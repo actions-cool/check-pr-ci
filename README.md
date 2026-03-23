@@ -47,6 +47,7 @@ jobs:
 | filter-head-ref | Filter PR head ref branch. | string | ✖ |
 | filter-support-fork | Filter PR come from. Default `true`. | boolean | ✖ |
 | skip-run-names | Skip some run names. | string | ✖ |
+| skip-check-label-name | Label name to skip during checks. | string | ✖ |
 | success-review | Whether to approve when success. | boolean | ✖ |
 | success-review-body | Review body. | string | ✖ |
 | success-merge | Whether to merge when success. | boolean | ✖ |
@@ -62,6 +63,7 @@ jobs:
 - `conflict-review-body`: Default is `😅 This branch has conflicts that must be resolved!`
 - `failure-review`: When use this, the `failure-review-body` is necessary
 - `skip-run-names`: [GitHub Doc](https://docs.github.com/en/rest/reference/checks#list-check-runs-for-a-git-reference) `check_runs` `name`. When you merge default branch into another, you should add `check-pr-ci` (The jobs name)
+- `skip-check-label-name`: PR labels used to skip the CI run `in_progress`/`failure` loop. 
 
 ## ⚡ Feedback
 
