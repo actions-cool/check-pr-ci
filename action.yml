@@ -27,6 +27,9 @@ inputs:
   # check
   skip-run-names:
     description: Skip some run names.
+  skip-check-label-name:
+    description: Label names to skip during checks.
+    default: skip-ci-check
   # resule
   ## success
   success-review:
