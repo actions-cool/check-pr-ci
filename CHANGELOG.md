@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.6.0
+
+`2026.03.23`
+
+- feat: suppport `skip-check-label-name`. [#5](https://github.com/actions-cool/check-pr-ci/pull/5)
+
 ## v1.5.0
 
 `2024.01.15`
