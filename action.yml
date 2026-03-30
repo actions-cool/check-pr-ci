@@ -56,5 +56,5 @@ inputs:
     description: Whether close PR.
 
 runs:
-  using: 'node12'
+  using: 'node24'
   main: 'dist/index.js'
