@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.7.0
+
+`2026.03.30`
+
+- chore: bump node to 24. [#6](https://github.com/actions-cool/check-pr-ci/pull/6)
+
 ## v1.6.0
 
 `2026.03.23`
